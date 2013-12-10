@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     cout << "Įvestas skaičių masyvas yra:" << endl;
     for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;
-    selection(a, 0, N-1);
+    selection(a,c, 0, N-1);
     cout << "Surūšiuotas skaičių masyvas yra:" << endl;
     for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;
@@ -35,10 +35,10 @@ template <class T>
     { T t = A ; A = B; B = t; }
 //Sukeičia elementus vietomis tik jei patenkinta sąlyga
 template <class T>
-  void compexch(T &A, T &B)
+  void compexch(T &A, T &B, T &C)
     { if (B < A)
      {exch(A, B);     
-     } }
+     C++} }
 // Išrinkimo algoritmo realizacija
 template <class T>
 void selection(T a[], int l, int r)
