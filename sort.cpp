@@ -127,8 +127,8 @@ void insertion( T a[], int l, int r, int &L, int &S)
   { int i;
     for (i = r; i > l; i--)
     {
-        compexch(a[i-1], a[i],L);
-        S++;
+        compexch(a[i-1], a[i],S);
+        L++;
     }
     for (i = l+2; i <= r; i++)
       {
@@ -161,7 +161,6 @@ void bubble(T a[], int l, int r, int &L, int &S)
 template <class T>
 void shiftRight(T a[], int l, int r, int &L, int &S)
 {
-   ++S;
     while ((l*2)+1 <= r)
     {
         int leftChild = (l * 2) + 1;
@@ -315,6 +314,6 @@ void merge(T a[],T b[], int l, int pivot, int r, int &L, int &S)
         }
         
     }
-    S++;
+    L++;
     for(k=l; k<=r; k++) a[k]=b[k];
 }
