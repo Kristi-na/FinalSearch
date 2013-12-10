@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
     cout << "Surusiuotas skaiciu masyvas yra:" << endl;
     for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;
-    cout << "Rusiuodamas algoritmas atlykto "<<S<<" lyginimo ir "<<L<<" sukeitimo operaciju:" << endl;
+    cout << "Rusiuodamas algoritmas atlykto "<<L<<" lyginimo ir "<<S<<" sukeitimo operaciju:" << endl;
     cout << "Ar dar karta rusiuosit? y/(betkoks) : ";
     cin>>ts;
     if(ts=='y'){t=false;}else {t=true;}
@@ -98,8 +98,8 @@ template <class T>
     { T t = A ; A = B; B = t; }
 // Sukei�?ia elementus vietomis tik jei patenkinta sąlyga
 template <class T>
-  void compexch(T &A, T &B, int &L)
-    { if (B < A) {exch(A, B); L++;} }
+  void compexch(T &A, T &B, int &S)
+    { if (B < A) {exch(A, B); S++;} }
 // I�?rinkimo algoritmo realizacija
 template <class T>
 
@@ -109,12 +109,16 @@ template <class T>
         {
             int min = i;
             for(int j=i+1;j<=r;j++)
+            {
                 if(a[j]<a[min])
                 {
-                    min=j; L++;//Atlikome lyginimo operaciją
+                    min=j; 
                 }
+                L++;//Atlikome lyginimo operaciją
+                }
+                S++;//Atlikome sukeitimo operaciją
             exch(a[i],a[min]);
-            S++;//Atlikome sukeitimo operaciją
+            
         }
   }
 // Įterpimo algoritmo realizacija
@@ -134,7 +138,7 @@ void insertion( T a[], int l, int r, int &L, int &S)
            {
                  a[j] = a[j-1];
                  j--;
-                 
+                 S++;
            }
         a[j] = v;
         
@@ -146,8 +150,8 @@ void bubble(T a[], int l, int r, int &L, int &S)
   { for (int i = l; i < r; i++)
       for (int j = r; j > i; j--)
         {
-            compexch(a[j-1], a[j],L);
-            S++;
+            compexch(a[j-1], a[j],S);
+            L++;
         }
   }
 
@@ -163,12 +167,13 @@ void shiftRight(T a[], int l, int r, int &L, int &S)
         int leftChild = (l * 2) + 1;
         int rightChild = leftChild + 1;
         int swapIdx = l;
-        ++S;
+        ++L;
         if (a[swapIdx] < a[leftChild])
         {
             swapIdx = leftChild;
             
         }
+        ++L;
         if ((rightChild <= r) && (a[swapIdx] < a[rightChild]))
         {
             swapIdx = rightChild;
@@ -177,7 +182,7 @@ void shiftRight(T a[], int l, int r, int &L, int &S)
         {
             exch(a[l],a[swapIdx]);
             l = swapIdx;
-            ++L;
+            ++S;
         }
         else
         {
@@ -235,9 +240,9 @@ int partition(T a[], int l, int r, int &L, int &S)
             int tmp = a[l];
             a[l] = a[r];
             a[r] = tmp;
-            L++;
+            S++;
         }
-        S++;
+        L++;
     }
     return r;
 }
@@ -288,9 +293,9 @@ void merge(T a[],T b[], int l, int pivot, int r, int &L, int &S)
         {
             b[i]=a[j];
             j++;
-            L++;
+            S++;
         }
-        S++;
+        L++;
         i++;
     }
     if(h>pivot)
